@@ -9,11 +9,12 @@ except I output to OLED as well as serial port.
 I'm currently using this to sniff my air conditioning unit's remote commands so I can control it through Home-Assistant.
 Also, who knows maybe I'll need something like this in the future for some other dumb thing I make.
 
+## Parts List
+
+
 ## Circuit
 
-TODO: parts list
-
-TODO: kicad image
+<a href="images/schematic-cropped.png"><img src="images/schematic-cropped.png" alt="cropped schematic" width="50%" height="50%"/></a>
 
 TODO: breadboard image
 
@@ -110,3 +111,4 @@ uint64_t data = 0x574354AB;
 ## References
 
 - https://github.com/crankyoldgit/IRremoteESP8266/tree/master
+- https://www.commandfusion.com/irdatabase
