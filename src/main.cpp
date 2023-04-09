@@ -10,10 +10,12 @@
 #include <Wire.h>
 
 #define IR_PIN D7
+#define LED_PIN D6
 
 #define DISPLAY_WIDTH 128
 #define DISPLAY_HEIGHT 64
 #define IR_DEBOUNCE_MS 300
+#define LED_FEEDBACK_MS 75
 
 // Large buffer for decoding things like air conditioner remote codes
 #define IR_BUFFER_SIZE 1024
@@ -51,6 +53,7 @@ decode_results irDecoded;
 IRrecv irrecv(IR_PIN, IR_BUFFER_SIZE, IR_TIMEOUT_MS);
 
 struct ezTimer irTimer;
+struct ezTimer ledTimer;
 
 /*** utils ***/
 
@@ -67,6 +70,8 @@ void setup() {
     Serial.begin(115200);
     while(!Serial) {}
     Serial.println("\n* * * START * * *");
+
+    pinMode(LED_PIN, OUTPUT);
 
     // init display
     if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
@@ -87,9 +92,21 @@ void setup() {
 }
 
 void loop() {
+    ledTimer.currentMs = millis();
+    if ((ledTimer.currentMs - ledTimer.prevMs) > LED_FEEDBACK_MS) {
+        ledTimer.prevMs = ledTimer.currentMs;
+        ledTimer.trigger = false;
+        digitalWrite(LED_PIN, 0);
+    }
+
     irTimer.currentMs = millis();
 
-	if (((irTimer.currentMs - irTimer.prevMs) > IR_DEBOUNCE_MS) && irrecv.decode(&irDecoded)) {
+	if ((irTimer.currentMs - irTimer.prevMs) > IR_DEBOUNCE_MS && irrecv.decode(&irDecoded)) {
+
+        if (!ledTimer.trigger) {
+            ledTimer.trigger = true;
+            digitalWrite(LED_PIN, 1);
+        }
         Serial.print(resultToHumanReadableBasic(&irDecoded));
 
         String acDescription = IRAcUtils::resultAcToString(&irDecoded);
