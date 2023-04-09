@@ -113,8 +113,8 @@ void loop() {
         if (acDescription.length()) {
             Serial.println(D_STR_MESGDESC ": " + acDescription);
         }
-        Serial.println("\nAs Source Code:");
-        Serial.println(resultToSourceCode(&irDecoded));
+        // Serial.println("\nAs Source Code:");
+        // Serial.println(resultToSourceCode(&irDecoded));
         Serial.println("-----------------------------------------------------------");
 
         resetDisplay();
