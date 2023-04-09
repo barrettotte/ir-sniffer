@@ -9,15 +9,24 @@ except I output to OLED as well as serial port.
 I'm currently using this to sniff my air conditioning unit's remote commands so I can control it through Home-Assistant.
 Also, who knows maybe I'll need something like this in the future for some other dumb thing I make.
 
+## Parts List
+
+- 1x ESP8266
+- 1x VS1838B IR sensor
+- 1x SSD1306 mini OLED
+- 1x 470Ω resistor
+- 1x 100Ω resistor
+- 4x M2.5x10mm brass standoff
+- 4x M2.5x6mm screw
+- 2x Male header
+
 ## Circuit
 
-TODO: parts list
+<a href="images/schematic-cropped.png"><img src="images/schematic-cropped.png" alt="cropped schematic" width="50%" height="50%"/></a>
 
-TODO: kicad image
+<a href="images/breadboard.jpg"><img src="images/breadboard.jpg" alt="breadboard" width="50%" height="50%"/></a>
 
-TODO: breadboard image
-
-TODO: protoboard image
+<a href="images/protoboard.jpg"><img src="images/protoboard.jpg" alt="protoboard" width="50%" height="50%"/></a>
 
 ## IR Samples
 
@@ -110,3 +119,4 @@ uint64_t data = 0x574354AB;
 ## References
 
 - https://github.com/crankyoldgit/IRremoteESP8266/tree/master
+- https://www.commandfusion.com/irdatabase
